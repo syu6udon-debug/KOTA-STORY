@@ -1,13 +1,29 @@
 <head>
 <style>
     /* フォントと背景を引き締める */
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #001f3f 0%, #003366 100%);
-      color: #eee;
-      font-family: 'Nunito Sans', sans-serif;
-    }
+body {
+  background: linear-gradient(135deg, #001f3f 0%, #003366 100%);
+  color: #f8f8f8; /* ← より明るく読みやすい文字色に */
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.7); /* ← 背景をさらに暗くして文字が浮き出るように */
+}
+
+section h2 {
+  color: #ffdd57;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4); /* 見出しの可視性アップ */
+}
+
+section p, section ul {
+  color: #f2f2f2; /* 通常テキストもより明るく */
+}
+
+.vote-button {
+  color: #002244; /* ボタン文字も背景に合う濃い色に調整 */
+}
+
     .overlay {
       max-width: 920px;
       margin: 50px auto;
