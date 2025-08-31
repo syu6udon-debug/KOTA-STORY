@@ -125,6 +125,16 @@
       border-top: 1px solid #444;
       margin-top: 50px;
     }
+.score-table {
+  background-color: #ffffff;  /* 白背景 */
+  color: #000000;             /* 黒文字 */
+  border: 1px solid #ccc;
+}
+
+.score-table th {
+  background-color: #f2f2f2;  /* ヘッダーも薄グレーに */
+  color: #000000;
+}
 
 .rule-image-box {
   margin-top: 20px;
@@ -286,7 +296,6 @@
       &copy; 2025 KOTA STORY MANIA! — 生野高校 2‑7
     </footer>
   </div>
-
   <script>
     // スライドショー制御（4秒ごと切り替え）
     const slides = document.querySelectorAll('.slides img');
