@@ -1,0 +1,107 @@
+<head>
+<link rel="stylesheet" href="style.css">
+ <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KOTA STORY MANIA! </title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito+Sans:wght@300;600&display=swap" rel="stylesheet">
+ </head>
+<body>
+  <div class="overlay">
+    <header>
+      <h1>KOTA STORY MANIA</h1>
+      <p>…そろそろ、スリルを体感する時だ。</p>
+      <div class="slideshow">
+        <div class="slides">
+          <img src="images/slide1.jpg" alt="観覧車の夜景" class="active">
+          <img src="images/slide2.jpg" alt="スリリングなコースター">
+          <img src="images/slide3.jpg" alt="夜の広場に光る風船">
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <h2>アトラクション紹介</h2>
+      <p>Wiiリモコンを手に、リアルなトロッコの世界へ。狙って飛ばして...まるで本物の冒険気分だ！</p>
+    </section>
+
+    <section>
+      <h2>開催情報</h2>
+      <p>
+        <strong>場所：</strong>生野高校 2‑7 教室<br>
+        <strong>日時：</strong>9月5日・6日（文化祭当日）<br>
+        <strong>参加費：</strong>無料<br>
+        <strong>所要時間：</strong>約10分
+      </p>
+    </section>
+
+    <section>
+      <h2>プレイルール</h2>
+      <ul>
+        <li>コントローラは大切に、優しく使ってね</li>
+        <li>順番を守って、みんなが楽しめるように</li>
+        <li>写真撮影は止まってから</li>
+      </ul>
+
+  <div class="rule-image-box">
+    <img src="images/rule-example.jpg" alt="プレイの様子" class="rule-image" />
+    <p class="rule-caption">↑ こうやって構えてね！</p>
+  </div>
+</section>
+
+    <section>
+      <h2>人気投票</h2>
+      <p>最高の体験だと思ったなら、ぜひ投票しておくれ。</p>
+      <a href="https://example.com/vote" class="vote-button" target="_blank">投票する</a>
+    </section>
+
+    <section>
+      <h2>スコアランキング</h2>
+      <p>ヒーローたちの名がここに刻まれる！</p>
+      <table>
+        <thead>
+          <tr><th>順位</th><th>名前</th><th>スコア</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>🥇 1位</td><td>ユウキ</td><td>9800</td></tr>
+          <tr><td>🥈 2位</td><td>アヤカ</td><td>9400</td></tr>
+          <tr><td>🥉 3位</td><td>ケント</td><td>9100</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>ここがポイント！</h2>
+      <ul>
+        <li>直感的に遊べるWiiリモコン操作</li>
+        <li>トロッコに乗って臨場感たっぷり</li>
+        <li>人気投票であなたの声を届けよう！</li>
+        <li>ハイスコアを目指してみんなで盛り上がろう！</li>
+        <li>みんなで文化祭を楽しもう！</li>
+      </ul>
+    </section>
+
+    <footer>
+      &copy; 2025 KOTA STORY MANIA! — 生野高校 2‑7
+    </footer>
+  </div>
+
+  <script>
+    // スライドショー制御（4秒ごと切り替え）
+    const slides = document.querySelectorAll('.slides img');
+    let idx = 0;
+    setInterval(() => {
+      slides[idx].classList.remove('active');
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add('active');
+    }, 4000);
+
+    // スクロールでセクションを表示
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('section').forEach(s => obs.observe(s));
+  </script>
+</body>
+</html>
