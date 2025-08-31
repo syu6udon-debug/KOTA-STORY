@@ -294,3 +294,14 @@ footer {
     padding-bottom: 60%;
   }
 }
+#rules ul,
+#points ul {
+  margin-left: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+#rules li,
+#points li {
+  text-align: left;
+}
