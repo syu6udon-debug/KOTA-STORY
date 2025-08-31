@@ -294,14 +294,18 @@ footer {
     padding-bottom: 60%;
   }
 }
-#rules ul,
-#points ul {
+ul {
   margin-left: 0;
   padding-left: 0;
   list-style: none;
 }
 
-#rules li,
-#points li {
+ul li {
   text-align: left;
+}
+
+ul li::before {
+  content: '▶';
+  margin-right: 6px;
+  color: #ffdd57;
 }
