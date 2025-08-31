@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KOTA STORY MANIA! — クールver.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito+Sans:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    /* フォントと背景を引き締める */
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #001f3f 0%, #003366 100%);
+      color: #eee;
+      font-family: 'Nunito Sans', sans-serif;
+    }
+    .overlay {
+      max-width: 920px;
+      margin: 50px auto;
+      background: rgba(10, 10, 30, 0.85);
+      border-radius: 12px;
+      padding: 45px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    }
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+    header h1 {
+      font-family: 'Anton', sans-serif;
+      font-size: 4.4rem;
+      color: #ffdd57;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px rgba(255, 221, 87, 0.2);
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.4rem;
+      color: #ccc;
+      opacity: 0; animation: fadeInUp 1s forwards 0.8s;
+    }
+    /* スライドショー：大胆にフェード＆スケール＋マウス追従パララックス */
+    .slideshow {
+      position: relative;
+      width: 100%;
+      height: 0; padding-bottom: 56%;
+      overflow: hidden;
+      margin-top: 25px;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+    .slides img {
+      position: absolute;
+      width: 110%;
+      height: 110%;
+      top: -5%;
+      left: -5%;
+      object-fit: cover;
+      opacity: 0;
+      filter: brightness(0.85);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+    .slides img.active {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    /* セクション動きも“ずらし”アニメ＋登場 */
+    section {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 0.8s ease-out;
+      margin-bottom: 45px;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    section h2 {
+      font-size: 1.8rem;
+      border-left: 4px solid #ffdd57;
+      padding-left: 10px;
+      margin-bottom: 12px;
+      color: #ffdd57;
+    }
+    section p, section ul {
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    ul { margin-left: 20px; list-style: none; }
+    ul li::before {
+      content: '▶';
+      margin-right: 6px;
+      color: #ffdd57;
+    }
+    /* 投票ボタン：ネオン風光と微動 */
+    .vote-button {
+      display: inline-block;
+      background: #ffdd57;
+      color: #001f3f;
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 0 8px rgba(255,221,87,0.8), inset 0 0 4px rgba(255,255,255,0.5);
+      transition: transform 0.2s ease;
+    }
+    .vote-button:hover {
+      transform: scale(1.05);
+      animation: neonGlow 1.5s infinite alternate;
+    }
+    @keyframes neonGlow {
+      to { box-shadow: 0 0 20px rgba(255,221,87,1), inset 0 0 6px rgba(255,255,255,0.7); }
+    }
+    /* アニメーションまとめ */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* フッター */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #888;
+      font-size: 0.9rem;
+      border-top: 1px solid #444;
+      margin-top: 50px;
+    }
+
+.rule-image-box {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.rule-image {
+  max-width: 90%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+}
+.rule-image:hover {
+  transform: scale(1.03);
+}
+
+.rule-caption {
+  font-size: 0.95rem;
+  color: #ffdd57;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+.score-container {
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(145deg, #0a1a2f, #112b4a);
+}
+
+.score-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.05rem;
+  color: #e0f0ff;
+}
+
+.score-table thead {
+  background-color: #003366;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.score-table th, .score-table td {
+  padding: 14px 18px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.score-table td:last-child {
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-align: center; 
+  padding-right: 0;
+  color: #66ccff;
+}
+
+
+.score-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.07);
+  transition: background 0.3s ease;
+}
+
+/* 特定順位スタイル（ネオン風） */
+.score-table .first {
+  background: linear-gradient(to right, #ffe06611, #ffe06622);
+  border-left: 4px solid #ffe066;
+}
+.score-table .second {
+  background: linear-gradient(to right, #d0d0d011, #d0d0d022);
+  border-left: 4px solid #bbbbbb;
+}
+.score-table .third {
+  background: linear-gradient(to right, #cd7f3211, #cd7f3222);
+  border-left: 4px solid #cd7f32;
+}
+
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <h1>KOTA STORY MANIA</h1>
+      <p>…そろそろ、スリルを体感する時だ。</p>
+      <div class="slideshow">
+        <div class="slides">
+          <img src="images/slide1.jpg" alt="観覧車の夜景" class="active">
+          <img src="images/slide2.jpg" alt="スリリングなコースター">
+          <img src="images/slide3.jpg" alt="夜の広場に光る風船">
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <h2>アトラクション紹介</h2>
+      <p>Wiiリモコンを手に、リアルなトロッコの世界へ。狙って飛ばして...まるで本物の冒険気分だ！</p>
+    </section>
+
+    <section>
+      <h2>開催情報</h2>
+      <p>
+        <strong>場所：</strong>生野高校 2‑7 教室<br>
+        <strong>日時：</strong>9月5日・6日（文化祭当日）<br>
+        <strong>参加費：</strong>無料<br>
+        <strong>所要時間：</strong>約10分
+      </p>
+    </section>
+
+    <section>
+      <h2>プレイルール</h2>
+      <ul>
+        <li>コントローラは大切に、優しく使ってね</li>
+        <li>順番を守って、みんなが楽しめるように</li>
+        <li>写真撮影は止まってから</li>
+      </ul>
+
+  <div class="rule-image-box">
+    <img src="images/rule-example.jpg" alt="プレイの様子" class="rule-image" />
+    <p class="rule-caption">↑ こうやって構えてね！</p>
+  </div>
+</section>
+
+    <section>
+      <h2>人気投票</h2>
+      <p>最高の体験だと思ったなら、ぜひ投票しておくれ。</p>
+      <a href="https://example.com/vote" class="vote-button" target="_blank">投票する</a>
+    </section>
+
+<section>
+  <h2>スコアランキング</h2>
+  <p>ヒーローの名をここに刻め！</p>
+  <div class="score-container">
+    <table class="score-table">
+      <thead>
+        <tr>
+          <th>順位</th>
+          <th>プレイヤー</th>
+          <th>スコア</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="first"><td>🥇 1位</td><td>ユウキ</td><td>9800</td></tr>
+        <tr class="second"><td>🥈 2位</td><td>アヤカ</td><td>9400</td></tr>
+        <tr class="third"><td>🥉 3位</td><td>ケント</td><td>9100</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+    <section>
+      <h2>ここがポイント！</h2>
+      <ul>
+        <li>直感的に遊べるWiiリモコン操作</li>
+        <li>トロッコに乗って臨場感たっぷり</li>
+        <li>人気投票であなたの声を届けよう！</li>
+        <li>ハイスコアを目指してみんなで盛り上がろう！</li>
+        <li>フォントと影の使い方で、ポップさとクールさを両立</li>
+      </ul>
+    </section>
+
+    <footer>
+      &copy; 2025 KOTA STORY MANIA! — 生野高校 2‑7
+    </footer>
+  </div>
+
+  <script>
+    // スライドショー制御（4秒ごと切り替え）
+    const slides = document.querySelectorAll('.slides img');
+    let idx = 0;
+    setInterval(() => {
+      slides[idx].classList.remove('active');
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add('active');
+    }, 4000);
+
+    // スクロールでセクションを表示
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('section').forEach(s => obs.observe(s));
+  </script>
+</body>
+</html>
