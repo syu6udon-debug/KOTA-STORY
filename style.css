@@ -1,143 +1,164 @@
-<head>
-<style>
-    /* フォントと背景を引き締める */
+/* ベーススタイル */
 body {
+  margin: 0;
+  padding: 0;
   background: linear-gradient(135deg, #001f3f 0%, #003366 100%);
-  color: #f8f8f8; /* ← より明るく読みやすい文字色に */
+  color: #f8f8f8; /* より明るく読みやすい文字色 */
   font-family: 'Nunito Sans', sans-serif;
 }
 
 .overlay {
-  background: rgba(0, 0, 0, 0.7); /* ← 背景をさらに暗くして文字が浮き出るように */
+  max-width: 920px;
+  margin: 50px auto;
+  background: rgba(0, 0, 0, 0.7); /* 背景を暗くして文字を浮かせる */
+  border-radius: 12px;
+  padding: 45px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+header h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: 4.4rem;
+  color: #ffdd57;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px rgba(255, 221, 87, 0.4);
+  margin-bottom: 10px;
+  line-height: 1.1;
+  white-space: normal; /* 改行可能 */
+}
+
+header p {
+  font-size: 1.4rem;
+  color: #ccc;
+  opacity: 0;
+  animation: fadeInUp 1s forwards 0.8s;
+}
+
+/* スライドショー */
+.slideshow {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56%;
+  overflow: hidden;
+  margin-top: 25px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.slides img {
+  position: absolute;
+  width: 110%;
+  height: 110%;
+  top: -5%;
+  left: -5%;
+  object-fit: cover;
+  opacity: 0;
+  filter: brightness(0.85);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.slides img.active {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* セクション */
+section {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.8s ease-out;
+  margin-bottom: 45px;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 section h2 {
+  font-size: 1.8rem;
+  border-left: 4px solid #ffdd57;
+  padding-left: 10px;
+  margin-bottom: 12px;
   color: #ffdd57;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.4); /* 見出しの可視性アップ */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
-section p, section ul {
-  color: #f2f2f2; /* 通常テキストもより明るく */
+section p,
+section ul {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #f2f2f2;
 }
 
+ul {
+  margin-left: 20px;
+  list-style: none;
+}
+
+ul li::before {
+  content: '▶';
+  margin-right: 6px;
+  color: #ffdd57;
+}
+
+/* 投票ボタン */
 .vote-button {
-  color: #002244; /* ボタン文字も背景に合う濃い色に調整 */
+  display: inline-block;
+  background: #ffdd57;
+  color: #002244;
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: 0 0 8px rgba(255, 221, 87, 0.8),
+    inset 0 0 4px rgba(255, 255, 255, 0.5);
+  transition: transform 0.2s ease;
 }
 
-    .overlay {
-      max-width: 920px;
-      margin: 50px auto;
-      background: rgba(10, 10, 30, 0.85);
-      border-radius: 12px;
-      padding: 45px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
-    }
-    header {
-      text-align: center;
-      margin-bottom: 50px;
-      position: relative;
-    }
-    header h1 {
-      font-family: 'Anton', sans-serif;
-      font-size: 4.4rem;
-      color: #ffdd57;
-      letter-spacing: 2px;
-      text-shadow: 0 0 8px rgba(255, 221, 87, 0.2);
-      margin-bottom: 10px;
-    }
-    header p {
-      font-size: 1.4rem;
-      color: #ccc;
-      opacity: 0; animation: fadeInUp 1s forwards 0.8s;
-    }
-    /* スライドショー：大胆にフェード＆スケール＋マウス追従パララックス */
-    .slideshow {
-      position: relative;
-      width: 100%;
-      height: 0; padding-bottom: 56%;
-      overflow: hidden;
-      margin-top: 25px;
-      border-radius: 10px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    }
-    .slides img {
-      position: absolute;
-      width: 110%;
-      height: 110%;
-      top: -5%;
-      left: -5%;
-      object-fit: cover;
-      opacity: 0;
-      filter: brightness(0.85);
-      transition: opacity 1.2s ease, transform 1.2s ease;
-    }
-    .slides img.active {
-      opacity: 1;
-      transform: scale(1.05);
-    }
-    /* セクション動きも“ずらし”アニメ＋登場 */
-    section {
-      opacity: 0;
-      transform: translateX(-30px);
-      transition: all 0.8s ease-out;
-      margin-bottom: 45px;
-    }
-    section.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    section h2 {
-      font-size: 1.8rem;
-      border-left: 4px solid #ffdd57;
-      padding-left: 10px;
-      margin-bottom: 12px;
-      color: #ffdd57;
-    }
-    section p, section ul {
-      font-size: 1.05rem;
-      line-height: 1.6;
-    }
-    ul { margin-left: 20px; list-style: none; }
-    ul li::before {
-      content: '▶';
-      margin-right: 6px;
-      color: #ffdd57;
-    }
-    /* 投票ボタン：ネオン風光と微動 */
-    .vote-button {
-      display: inline-block;
-      background: #ffdd57;
-      color: #001f3f;
-      font-size: 1.15rem;
-      font-weight: 600;
-      padding: 14px 32px;
-      border-radius: 30px;
-      text-decoration: none;
-      box-shadow: 0 0 8px rgba(255,221,87,0.8), inset 0 0 4px rgba(255,255,255,0.5);
-      transition: transform 0.2s ease;
-    }
-    .vote-button:hover {
-      transform: scale(1.05);
-      animation: neonGlow 1.5s infinite alternate;
-    }
-    @keyframes neonGlow {
-      to { box-shadow: 0 0 20px rgba(255,221,87,1), inset 0 0 6px rgba(255,255,255,0.7); }
-    }
-    /* アニメーションまとめ */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    /* フッター */
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #888;
-      font-size: 0.9rem;
-      border-top: 1px solid #444;
-      margin-top: 50px;
-    }
+.vote-button:hover {
+  transform: scale(1.05);
+  animation: neonGlow 1.5s infinite alternate;
+}
 
+@keyframes neonGlow {
+  to {
+    box-shadow: 0 0 20px rgba(255, 221, 87, 1),
+      inset 0 0 6px rgba(255, 255, 255, 0.7);
+  }
+}
+
+/* アニメーション */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* フッター */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+  font-size: 0.9rem;
+  border-top: 1px solid #444;
+  margin-top: 50px;
+}
+
+/* ルール画像 */
 .rule-image-box {
   margin-top: 20px;
   text-align: center;
@@ -147,10 +168,11 @@ section p, section ul {
   max-width: 90%;
   height: auto;
   border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
   cursor: zoom-in;
 }
+
 .rule-image:hover {
   transform: scale(1.03);
 }
@@ -162,6 +184,7 @@ section p, section ul {
   font-style: italic;
 }
 
+/* スコアテーブル */
 .score-container {
   margin-top: 20px;
   border-radius: 12px;
@@ -184,7 +207,8 @@ section p, section ul {
   letter-spacing: 1px;
 }
 
-.score-table th, .score-table td {
+.score-table th,
+.score-table td {
   padding: 14px 18px;
   text-align: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -193,30 +217,28 @@ section p, section ul {
 .score-table td:last-child {
   font-weight: 700;
   font-size: 1.2rem;
-  text-align: center; 
+  text-align: center;
   padding-right: 0;
   color: #66ccff;
 }
-
 
 .score-table tr:hover {
   background-color: rgba(255, 255, 255, 0.07);
   transition: background 0.3s ease;
 }
 
-/* 特定順位スタイル（ネオン風） */
-.score-table .first {
-  background: linear-gradient(to right, #ffe06611, #ffe06622);
+/* 順位色（シンプル版に調整済み） */
+.score-table tr:nth-child(1) {
   border-left: 4px solid #ffe066;
 }
-.score-table .second {
-  background: linear-gradient(to right, #d0d0d011, #d0d0d022);
+.score-table tr:nth-child(2) {
   border-left: 4px solid #bbbbbb;
 }
-.score-table .third {
-  background: linear-gradient(to right, #cd7f3211, #cd7f3222);
+.score-table tr:nth-child(3) {
   border-left: 4px solid #cd7f32;
 }
+
+/* レスポンシブ対応（スマホ対応） */
 @media screen and (max-width: 600px) {
   body {
     font-size: 90%;
@@ -229,7 +251,12 @@ section p, section ul {
   }
 
   header h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   header p {
@@ -243,6 +270,11 @@ section p, section ul {
 
   section h2 {
     font-size: 1.4rem;
+  }
+
+  section p,
+  section ul {
+    font-size: 1rem;
   }
 
   .rule-image {
@@ -262,6 +294,3 @@ section p, section ul {
     padding-bottom: 60%;
   }
 }
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  </style>
-</head>
