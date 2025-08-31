@@ -260,14 +260,15 @@
     <section>
       <h2>スコアランキング</h2>
       <p>ヒーローたちの名がここに刻まれる！</p>
+      <table class="score-table">
       <table>
         <thead>
           <tr><th>順位</th><th>名前</th><th>スコア</th></tr>
         </thead>
         <tbody>
-          <tr><td>🥇 1位</td><td>ユウキ</td><td>9800</td></tr>
-          <tr><td>🥈 2位</td><td>アヤカ</td><td>9400</td></tr>
-          <tr><td>🥉 3位</td><td>ケント</td><td>9100</td></tr>
+<tr class="first"><td>🥇 1位</td><td>ユウキ</td><td>9800</td></tr>
+<tr class="second"><td>🥈 2位</td><td>アヤカ</td><td>9400</td></tr>
+<tr class="third"><td>🥉 3位</td><td>ケント</td><td>9100</td></tr>
         </tbody>
       </table>
     </section>
